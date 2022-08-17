@@ -21,6 +21,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.annotation.StringRes
 import androidx.recyclerview.widget.RecyclerView
 import com.example.dogglers.R
 import com.example.dogglers.const.Layout
@@ -46,12 +47,15 @@ class DogCardAdapter(
         private val textDogAge = view.findViewById<TextView>(R.id.text_dog_age)
         private val textDogHobbies = view.findViewById<TextView>(R.id.text_dog_hobbies)
 
+        private val getString = fun (@StringRes resourceId: Int, value: String): String {
+            return view.context.getString(resourceId, value)
+        }
+
         fun setDogData(dog: Dog) {
             imageDog.setImageResource(dog.imageResourceId)
             textDogName.text = dog.name
-            // TODO: Extract formatted string into resources somehow
-            textDogAge.text = "Age: ${dog.age}"
-            textDogHobbies.text = "Hobbies: ${dog.hobbies}"
+            textDogAge.text = getString(R.string.dog_age, dog.age)
+            textDogHobbies.text = getString(R.string.dog_hobbies, dog.hobbies)
         }
     }
 
